@@ -1,6 +1,6 @@
 angular.module('PescarApp')
 
-.controller('QuestionsPageCtrl', function($scope, $filter, $state) {
+.controller('QuestionsPageCtrl', function($scope, questionsManager) {
 
     $scope.getFilteredQuestions = function(){
         return $scope.questions.filter(function(question){
@@ -19,6 +19,29 @@ angular.module('PescarApp')
         $scope.filteredQuestions = $scope.getFilteredQuestions();
         //Enviar data a Server
 
+    };
+
+    $scope.getQuestionsData = function(){
+        questionsManager.getQuestions(function(response){
+            response.data.forEach(function(question, index){
+                var answer = [];
+                $scope.getAnswersByQuestionId(question.id, function(response){
+                    $scope.questions[index].answers = response.data;
+                    $scope.filteredQuestions = $scope.getFilteredQuestions();
+                }, function(){
+                    $scope.questions[index].answers = $scope.answers[question.id];
+                    $scope.filteredQuestions = $scope.getFilteredQuestions();
+                });
+            });
+            $scope.questions = response.data;
+            $scope.filteredQuestions = $scope.getFilteredQuestions();
+        }, function(error){
+            console.warn("request error");
+        })
+    };
+
+    $scope.getAnswersByQuestionId = function(questionId, onSuccess, onError){
+        questionsManager.getAnswersByQuestionId(questionId, onSuccess, onError)
     };
 
     $scope.questions = [
@@ -77,8 +100,47 @@ angular.module('PescarApp')
             chosenAnswer: null
         }
     ];
+    $scope.answers = {
+        1: [
+            {
+                id: 1,
+                text: "Soy yo",
+                user:"Pepe"
+            },
+            {
+                id: 2,
+                text: "Se llama pablo",
+                user:"Juan"
+            }
+        ],
+        2: [
+            {
+                id: 1,
+                text: "Soy yo",
+                user:"Pepe"
+            },
+            {
+                id: 2,
+                text: "Se llama pablo",
+                user:"Juan"
+            }
+        ],
+        3: [
+            {
+                id: 1,
+                text: "Soy yo",
+                user:"Pepe"
+            },
+            {
+                id: 2,
+                text: "Se llama pablo",
+                user:"Juan"
+            }
+        ]
+    };
 
 
     $scope.filteredQuestions = $scope.getFilteredQuestions();
+
 
 });

@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="components/landingPage/landingPage.css">
   <link rel="stylesheet" href="components/questions/questionsPage.css">
   <link rel="stylesheet" href="components/notifications/notificationsPage.css">
+  <link rel="stylesheet" href="components/courses/coursesPage.css">
 
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -26,11 +27,11 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
+          <!--<li class="nav-item active">-->
+            <!--<a class="nav-link" href="#">Home-->
+              <!--<span class="sr-only">(current)</span>-->
+            <!--</a>-->
+          <!--</li>-->
           <li class="nav-item">
             <a class="nav-link" href="#" ng-click="goToState('questionsPage')">Revisar Preguntas</a>
           </li>
@@ -38,8 +39,11 @@
             <a class="nav-link" href="#" ng-click="goToState('notificationsPage')">Notificaciones</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Alumnos</a>
+            <a class="nav-link" href="#" ng-click="goToState('coursesPage')">Cursos</a>
           </li>
+          <!--<li class="nav-item">-->
+            <!--<a class="nav-link" href="#">Alumnos</a>-->
+          <!--</li>-->
         </ul>
       </div>
     </div>
@@ -59,5 +63,6 @@
   <script src="components/landingPage/landingPage.js"></script>
   <script src="components/questions/questionsPage.js"></script>
   <script src="components/notifications/notificationsPage.js"></script>
+  <script src="components/courses/coursesPage.js"></script>
 </body>
 </html>
