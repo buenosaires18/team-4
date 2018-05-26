@@ -17,6 +17,13 @@ class Course(models.Model):
     def __str__(self):
         return self.name
 
+class Suscription(models.Model):
+    student =  models.ForeignKey(Student, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    user = models.CharField(max_length=100, blank=True, default='')
+    course_name = models.CharField(max_length=100, blank=True, default='')
+    terminado = models.BooleanField(default=False)
+
 #Modelo de preguntas
 class Question(models.Model):
     text = models.CharField(max_length=500, blank=False, default='')
@@ -32,6 +39,8 @@ class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     student =  models.ForeignKey(Student, on_delete=models.CASCADE)
     user = models.CharField(max_length=100, blank=True, default='')
+    
 
     def __str__(self):
         return self.text
+

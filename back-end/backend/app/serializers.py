@@ -1,7 +1,7 @@
 #For restfull API
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
-from app.models import Student, Course, Question, Answer
+from app.models import *
 from django.db import models
 
 #Default serializers
@@ -52,4 +52,15 @@ class QASerializer(serializers.ModelSerializer):
     answer = serializers.PrimaryKeyRelatedField(queryset=Answer.objects.all(),required=False, allow_null=True)
     class Meta:
         model = models.Model
+        fields = "__all__"
+
+#Suscription Serializers
+class SuscriptionSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Suscription
+        fields = "__all__"
+
+class SuscriptionPOSTPUTDELSerializerCreator(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Suscription
         fields = "__all__"

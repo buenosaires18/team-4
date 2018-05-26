@@ -24,6 +24,7 @@ router.register(r'student', views.StudentViewSet)
 router.register(r'course', views.CourseViewSet)
 router.register(r'question', views.QuestionViewSet)
 router.register(r'answer', views.AnswerViewSet)
+router.register(r'suscription', views.SuscriptionViewSet)
 
 
 # Wire up our API using automatic URL routing.
@@ -35,5 +36,7 @@ urlpatterns = [
     url(r'^courses/$',views.course_list),
     url(r'^questions/$',views.question_list),
     url(r'^answers/(?P<pk>\d+)$',views.answer_list),
+    url(r'^suscriptions/$',views.suscription_list),
+    url(r'^suscriptions/(?P<pk>\d+)$',views.suscription_detail),
 
 ]

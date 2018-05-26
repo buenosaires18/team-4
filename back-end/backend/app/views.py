@@ -3,15 +3,16 @@ from django.shortcuts import render
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework.views import APIView
-from app.serializers import *
+
 
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 
-# Models import
-from app.models import Student, Course, Answer
+# Models and serializers import
+from app.serializers import *
+from app.models import *
 
 #Default ViewSet
 class UserViewSet(viewsets.ModelViewSet):
@@ -46,6 +47,11 @@ class QuestionViewSet(viewsets.ModelViewSet):
 class AnswerViewSet(viewsets.ModelViewSet):
     queryset = Answer.objects.all()
     serializer_class = AnswerSerializerCreator
+
+#Suscription ViewSet
+class SuscriptionViewSet(viewsets.ModelViewSet):
+    queryset = Suscription.objects.all()
+    serializer_class = SuscriptionSerializer
 
 @csrf_exempt
 def student_list(request):
@@ -122,3 +128,47 @@ def answer_list(request, pk):
             serializer.save()
             return JsonResponse(serializer.data, status=201)
         return JsonResponse(serializer.errors, status=400)
+
+@csrf_exempt
+def suscription_list(request):
+    serializer_context = {
+            'request': request,
+        }
+    if request.method == 'GET':
+        suscription = Suscription.objects.all()
+        for s in suscription:
+            s.user = s.student.name
+            s.course_name = s.course.name
+        serializer = SuscriptionSerializer(suscription, many=True,context=serializer_context)
+        return JsonResponse(serializer.data, safe=False)
+
+    if request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = SuscriptionSerializer(data=data,context=serializer_context)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
+
+    if request.method == 'PUT': 
+        data = JSONParser().parse(request)
+        serializer = SuscriptionSerializer(data=data,context=serializer_context)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
+
+@csrf_exempt
+def suscription_detail(request, pk):
+    serializer_context = {
+            'request': request,
+        }
+    try:
+        print("El pk es: " + pk)
+        suscription = Suscription.objects.get(id=pk)
+    except Suscription.DoesNotExist:
+        return HttpResponse(status=404)
+
+    if request.method == 'DELETE':
+        suscription.delete()
+        return HttpResponse(status=204)
