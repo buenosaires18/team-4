@@ -19,6 +19,11 @@ func _ready():
 	txb_notification.connect("pressed", self, "go_to_notification", [], 0)
 	txb_profile.connect("pressed", self, "go_to_profile", [], 0)
 
+# Metodo llamado desde el home_screen, agrega acoplamiento. ver para mejorar.
+func hidden_head(p_state):
+	spr_logo.set_hidden(p_state)
+	spr_score.set_hidden(p_state)
+
 func hidden_control():
 	anp_home.play_backwards("view_controls")
 

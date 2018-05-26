@@ -1,9 +1,10 @@
-[gd_scene load_steps=21 format=1]
+[gd_scene load_steps=22 format=1]
 
 [ext_resource path="res://src/home_screen.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/particular/blue_button13.png" type="Texture" id=2]
 [ext_resource path="res://assets/sprites/particular/blue_button04.png" type="Texture" id=3]
 [ext_resource path="res://assets/fonts/cocogoose_trial.otf" type="DynamicFontData" id=4]
+[ext_resource path="res://scenes/nd_learn.tscn" type="PackedScene" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 
@@ -463,9 +464,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 82.0
-margin/top = 630.0
+margin/top = 615.0
 margin/right = 652.0
-margin/bottom = 777.0
+margin/bottom = 762.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -515,9 +516,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 82.0
-margin/top = 860.0
+margin/top = 830.0
 margin/right = 652.0
-margin/bottom = 1000.0
+margin/bottom = 977.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -900,6 +901,7 @@ __meta__ = {
 
 [node name="txb_back" type="TextureButton" parent="."]
 
+editor/display_folded = true
 visibility/visible = false
 visibility/opacity = 0.0
 focus/ignore_mouse = false
@@ -945,6 +947,8 @@ max_lines_visible = -1
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="nd_learn" parent="." instance=ExtResource( 5 )]
 
 [node name="an_player" type="AnimationPlayer" parent="."]
 

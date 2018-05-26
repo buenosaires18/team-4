@@ -16,6 +16,7 @@ onready var txb_confirmed = get_node("nd_response/txb_confirmed")
 onready var txe_question = get_node("nd_response/TextEdit")
 onready var lbl_ask = get_node("nd_response/lbl_ask")
 onready var txe_ask = get_node("nd_ask/TextEdit")
+onready var nd_learn = get_node("nd_learn")
 
 # Variable que mantiene el estado en que se encuentra el modal.
 var state_modal
@@ -94,7 +95,20 @@ func end_animation_question():
 
 # Metodo que muestra los cursos extras.
 func go_learn():
-	pass
+	# Bloqueo los botones.
+	disable_signal(true)
+	# Emito la señal para ocultar los botones del padre.
+	emit_signal("hidden_control")
+	# Malisimo. se debera mejorar.
+	get_parent().hidden_head(true)
+	
+	an_player.connect("finished", self, "end_animation_principal", [], 0)
+	an_player.play_backwards("view_modal")
+
+func end_animation_principal():
+	an_player.disconnect("finished", self, "end_animation_principal")
+	nd_learn.connect("quit_modal", self, "back_to_principal", [], 0)
+	nd_learn.view_modal()
 
 # Metodo que muestra las preguntas a responder.
 func go_question():
@@ -149,7 +163,11 @@ func end_animation_training():
 
 # Metodo que retorna al menu principal.
 func back_to_principal():
+	# Malisimo. se debera mejorar.
+	get_parent().hidden_head(false)
+	
 	disable_signal(true)
+	nd_learn.disconnect("quit_modal", self, "back_to_principal")
 	emit_signal("view_control")
 	an_player.disconnect("finished", self, "back_to_principal")
 	an_player.connect("finished", self, "end_animation_intro", [], 0)

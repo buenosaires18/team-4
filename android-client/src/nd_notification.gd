@@ -15,6 +15,10 @@ func _ready():
 func view_mensagge():
 	anp_notification.connect("finished", self, "go_to_mensagge", [], 0)
 	anp_notification.play_backwards("view_modal")
+	####
+	# Los mensajes se traeria de la API, aca deberia implementar un metodo update
+	# para poder traer los mensajes que esten en la bandeja.
+	####
 
 func go_to_mensagge():
 	anp_notification.disconnect("finished", self, "go_to_mensagge")
