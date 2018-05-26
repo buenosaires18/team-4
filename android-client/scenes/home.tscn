@@ -1,8 +1,15 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=12 format=1]
 
 [ext_resource path="res://src/home.gd" type="Script" id=1]
 [ext_resource path="res://scenes/home_screen.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/sprites/particular/blue_button07.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/particular/backgroundOk.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/particular/unnamed.png" type="Texture" id=4]
+[ext_resource path="res://scenes/nd_feedback.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/sprites/particular/blue_button07.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/particular/letter.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/particular/opened-email.png" type="Texture" id=8]
+[ext_resource path="res://assets/sprites/particular/user.png" type="Texture" id=9]
+[ext_resource path="res://assets/sprites/particular/feedback.png" type="Texture" id=10]
 
 [sub_resource type="Animation" id=1]
 
@@ -50,6 +57,26 @@ tracks/3/keys = {
 "update": 0,
 "values": [ 0.0, 1.0 ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("txb_feedback:visibility/visible")
+tracks/4/interp = 1
+tracks/4/imported = false
+tracks/4/keys = {
+"times": FloatArray( 0, 0.1 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("txb_feedback:visibility/opacity")
+tracks/5/interp = 1
+tracks/5/imported = false
+tracks/5/keys = {
+"times": FloatArray( 0.1, 0.5 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
 
 [node name="nd_home" type="Node2D"]
 
@@ -57,34 +84,90 @@ script/script = ExtResource( 1 )
 
 [node name="nd_home_screen" parent="." instance=ExtResource( 2 )]
 
-[node name="txb_notif" type="TextureButton" parent="."]
+[node name="spr_background" type="Sprite" parent="."]
+
+z/z = -10
+texture = ExtResource( 3 )
+centered = false
+
+[node name="spr_logo" type="Sprite" parent="."]
+
+transform/pos = Vector2( 355, 154 )
+transform/scale = Vector2( 2, 2 )
+z/z = -9
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="nd_feedback" parent="." instance=ExtResource( 5 )]
 
 visibility/visible = false
+
+[node name="txb_notif" type="TextureButton" parent="."]
+
+editor/display_folded = true
+visibility/visible = false
 visibility/opacity = 0.0
-rect/scale = Vector2( 3, 3 )
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 33.0
 margin/top = 1043.0
-margin/right = 82.0
-margin/bottom = 1092.0
+margin/right = 180.0
+margin/bottom = 1190.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-textures/normal = ExtResource( 3 )
+textures/normal = ExtResource( 6 )
 params/resize_mode = 0
+params/scale = Vector2( 3, 3 )
 params/stretch_mode = 0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="TextureFrame" type="TextureFrame" parent="txb_notif"]
+
+visibility/visible = false
+rect/scale = Vector2( 0.8, 0.8 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 22.0
+margin/top = 18.0
+margin/right = 150.0
+margin/bottom = 146.0
+texture = ExtResource( 7 )
+stretch_mode = 0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="TextureFrame 2" type="TextureFrame" parent="txb_notif"]
+
+rect/scale = Vector2( 0.8, 0.8 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 22.0
+margin/top = 18.0
+margin/right = 150.0
+margin/bottom = 146.0
+texture = ExtResource( 8 )
+stretch_mode = 0
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="txb_profile" type="TextureButton" parent="."]
 
+editor/display_folded = true
 visibility/visible = false
 visibility/opacity = 0.0
-rect/scale = Vector2( 3, 3 )
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -96,9 +179,69 @@ margin/bottom = 1092.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-textures/normal = ExtResource( 3 )
+textures/normal = ExtResource( 6 )
 params/resize_mode = 0
+params/scale = Vector2( 3, 3 )
 params/stretch_mode = 0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="TextureFrame" type="TextureFrame" parent="txb_profile"]
+
+rect/scale = Vector2( 0.8, 0.8 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 22.0
+margin/top = 18.0
+margin/right = 150.0
+margin/bottom = 146.0
+texture = ExtResource( 9 )
+stretch_mode = 0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="txb_feedback" type="TextureButton" parent="."]
+
+editor/display_folded = true
+visibility/visible = false
+visibility/opacity = 0.0
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 376.0
+margin/top = 1043.0
+margin/right = 523.0
+margin/bottom = 1190.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = ExtResource( 6 )
+params/resize_mode = 0
+params/scale = Vector2( 3, 3 )
+params/stretch_mode = 0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="txb_feedback" type="TextureFrame" parent="txb_feedback"]
+
+rect/scale = Vector2( 0.8, 0.8 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 22.0
+margin/top = 18.0
+margin/right = 150.0
+margin/bottom = 146.0
+texture = ExtResource( 10 )
+modulate = Color( 0.015625, 0.0152588, 0.0152588, 1 )
+stretch_mode = 0
 __meta__ = {
 "_edit_lock_": true
 }

@@ -22,6 +22,7 @@ var state_modal
 
 signal hidden_control
 signal view_control
+signal hidden_principal
 
 func _ready():
 	# Conecto los eventos de precionar de los botones a los metodos.
@@ -163,7 +164,27 @@ func back_to_training():
 
 # Metodo que envia la respuesta de la pregunta.
 func send_response():
-	pass
+	# Bloqueo los botones.
+	disable_signal(true)
+	####
+	# Aca deberia esta el metodo que envie la pregunta al server.
+	####
+	# Limpio el componente.
+	txe_question.set_text("")
+	# Emito la señal que avisa al padre que puede volver a mostrar los controles del home.
+	emit_signal("view_control")
+	an_player.connect("finished", self, "end_back_to_home", [], 0)
+	an_player.play_backwards("response_ask")
+
+func hidden_principal():
+	disable_signal(true)
+	an_player.connect("finished", self, "end_remove_principal", [], 0)
+	an_player.play_backwards("view_modal")
+
+func end_remove_principal():
+	an_player.disconnect("finished", self, "end_remove_principal")
+	emit_signal("hidden_principal")
+	disable_signal(false)
 
 # Metodo que gestiona las pantallas al querer volver.
 func back_modal():
