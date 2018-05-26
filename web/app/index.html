@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="PescarApp">
+<head>
+  <base href="/">
+  <meta charset="utf-8">
+  <title>Pescar App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <link rel="stylesheet" href="assets/css/app.css">
+  <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+  <link rel="stylesheet" href="components/landingPage/landingPage.css">
+
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body ng-controller="BaseCtrl">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="assets/images/fundacionPescar.png" alt="">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" ng-click="goToState('questionsPage')">Revisar Preguntas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Enviar Notificaciones</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Alumnos</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div ui-view class="main"></div>
+
+  <div class="footer"></div>
+
+  <script src="lib/angular/angular.js"></script>
+  <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
+
+  <script src="core/app.config.js"></script>
+  <script src="core/app.states.js"></script>
+  <script src="core/services/pescar.service.js"></script>
+  <script src="components/base/baseCtrl.js"></script>
+  <script src="components/landingPage/landingPage.js"></script>
+  <script src="components/questions/questionsPage.js"></script>
+</body>
+</html>

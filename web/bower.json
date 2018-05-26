@@ -1,0 +1,7 @@
+{
+  "name": "PescarApp",
+  "dependencies": {
+    "angular": "1.6.x",
+    "angular-ui-router": "*"
+  }
+}

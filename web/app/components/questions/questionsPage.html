@@ -1,0 +1,15 @@
+<div class="container questionPage">
+
+    <ul class="list-group" ng-repeat="question in questions">
+        <li class="list-group-item">
+
+            Pregunta: {{question.text}}
+            <div ng-repeat="answer in question.answers">
+                <div>{{answer.text}}</div>
+                <div>alumno: {{answer.user}}</div>
+            </div>
+        </li>
+
+    </ul>
+
+</div>
