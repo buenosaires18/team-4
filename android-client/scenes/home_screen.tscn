@@ -900,7 +900,6 @@ __meta__ = {
 
 [node name="txb_back" type="TextureButton" parent="."]
 
-editor/display_folded = true
 visibility/visible = false
 visibility/opacity = 0.0
 focus/ignore_mouse = false

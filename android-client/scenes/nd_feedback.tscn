@@ -5,14 +5,14 @@
 [ext_resource path="res://assets/sprites/particular/blue_button13.png" type="Texture" id=3]
 [ext_resource path="res://assets/sprites/particular/blue_button04.png" type="Texture" id=4]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 
 font/size = 40
 font/use_mipmaps = false
 font/use_filter = true
 font/font = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=2]
 
 font/size = 60
 font/use_mipmaps = false
@@ -114,7 +114,7 @@ margin/left = 0.0
 margin/top = 30.0
 margin/right = 720.0
 margin/bottom = 118.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.113725, 0.654902, 0.882353, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 3
@@ -141,7 +141,7 @@ margin/left = 0.0
 margin/top = 122.0
 margin/right = 722.0
 margin/bottom = 210.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.113725, 0.654902, 0.882353, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 3
