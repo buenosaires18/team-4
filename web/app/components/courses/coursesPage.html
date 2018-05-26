@@ -1,0 +1,27 @@
+<div class="container coursesPage">
+    <p class="font-weight-bold fs-medium margin-top-20">Alumnos por curso</p>
+
+    <form>
+        <div class="form-group">
+            <label>Selecciona un curso</label>
+            <select class="form-control" ng-options="course as course.title for course in courses track by item.id" ng-model="selectedCourse" ng-change="shuffleArray(students)">
+            </select>
+        </div>
+    </form>
+
+
+    <table class="table table-striped" >
+        <tr>
+            <th class="col font-weight-bold">Nombre</th>
+            <th class="col font-weight-bold">Aprobo</th>
+            <th class="col font-weight-bold">Desaprobo</th>
+        </tr>
+        <tr ng-repeat="student in students">
+            <td class="student-name">{{student.name}}</td>
+            <td><input type="radio"></td>
+            <td><input type="radio"></td>
+        </tr>
+    </table>
+
+
+</div>

@@ -1,0 +1,27 @@
+<div class="container questionPage" ng-init="getQuestionsData()">
+
+    <p class="font-weight-bold fs-medium">Selecciona la respuesta mas apropiada para cada respuesta</p>
+
+    <ul class="list-group" ng-repeat="question in filteredQuestions">
+        <li class="list-group-item bg-light">
+
+            <div class="question">
+                <div class="question-author">
+                    <span class="font-weight-bold">{{question.user}}</span> pregunta:
+                </div>
+                <div class="question-text">{{question.text}}</div>
+            </div>
+            <ul ng-repeat="answer in question.answers" class="answer list-group">
+                <li class="list-group-item">
+                    <div class="radio pull-right col-3">
+                        <label>Marcar como mejor respuesta <input type="checkbox" ng-checked="question.chosenAnswer === answer.id" ng-click="setBestAnswer(question.id, answer.id)" name="optradio"></label>
+                    </div>
+                    <div>{{answer.text}}</div>
+                    <br>
+                    <div class="answer-author pull-right">{{answer.user}}</div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+</div>
