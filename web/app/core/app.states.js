@@ -11,10 +11,16 @@ angular.module('PescarApp')
       controller: 'LandingPageCtrl',
       controllerAs: 'ctrl'
     })
-      .state('questionsPage', {
+    .state('questionsPage', {
       url: '/preguntas-de-alumnos',
       templateUrl: './../components/questions/questionsPage.html',
       controller: 'QuestionsPageCtrl',
+      controllerAs: 'ctrl'
+    })
+      .state('notificationsPage', {
+      url: '/notificaciones',
+      templateUrl: './../components/notifications/notificationsPage.html',
+      controller: 'NotificationsPageCtrl',
       controllerAs: 'ctrl'
     })
 

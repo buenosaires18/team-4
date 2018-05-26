@@ -1,0 +1,54 @@
+<div class="container notificationsPage">
+
+    <p class="font-weight-bold fs-medium margin-top-20">Crear notificación</p>
+
+    <div class="card bg-light text-dark" ng-click="config.showNotificationForm = !config.showNotificationForm">
+        <div class="card-body">{{(config.showNotificationForm ) ? 'Ocultar': 'Mostrar'}} formulario <i aria-hidden="true" ng-class="(config.showNotificationForm) ? 'fa fa-chevron-down' : 'fa fa-chevron-up'"></i></div>
+
+    </div>
+
+    <div ng-show="config.showNotificationForm" >
+        <form action="/" class="border rounded padding-20">
+            <div class="form-group">
+                <label for="notificationTile">Título</label>
+                <input type="notificationTile" class="form-control" id="notificationTile" ng-model="config.newNotification.title">
+            </div>
+
+            <div class="form-group">
+                <label for="message">Mensaje de la notificación</label>
+                <textarea class="form-control" id="message" rows="3" ng-model="config.newNotification.text"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Selecciona los grupos a los que les llegará la notificación</label>
+                <div ng-repeat="target in targets" class="col">
+                    <span class="">
+                        <input class="form-check-input" type="checkbox" value="" ng-checked="isTargetInList(target.id)" ng-click="handleTargetChange(target)">
+                        <label>{{target.description}}</label>
+                    </span>
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-primary" ng-click="sendNotification()">Enviar notificación</button>
+        </form>
+    </div>
+
+
+    <p class="font-weight-bold fs-medium margin-top-20">Lista de notificaciones</p>
+
+    <ul class="list-group" ng-repeat="notification in notifications">
+        <li class="list-group-item bg-light">
+            <div class="row">
+                <div class="col-12 font-weight-bold">{{notification.title}}</div>
+                <div class="col-12">{{notification.text}}</div>
+                <div class="col-12 pull-right">{{notification.date}}</div>
+                <div class="col-12 margin-top-10">
+                    <div ng-repeat="target in notification.target" class="display-inline-block">
+                        <span class="target bg-secondary text-white">{{target.description}}</span>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+</div>
