@@ -19,16 +19,19 @@ class Course(models.Model):
 
 #Modelo de preguntas
 class Question(models.Model):
-    question = models.CharField(max_length=500, blank=False, default='')
-    user =  models.ForeignKey(Student, on_delete=models.CASCADE)
+    text = models.CharField(max_length=500, blank=False, default='')
+    student =  models.ForeignKey(Student, on_delete=models.CASCADE)
+    user = models.CharField(max_length=100, blank=True, default='')
     def __str__(self):
-        return self.user + " " + self.question
+        return self.student.name + " " + self.text
 
 
 #Modelo de Respuesta
 class Answer(models.Model):
-    answer = models.CharField(max_length=500,blank=False, default='')
+    text = models.CharField(max_length=500,blank=False, default='')
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    user =  models.ForeignKey(Student, on_delete=models.CASCADE)
+    student =  models.ForeignKey(Student, on_delete=models.CASCADE)
+    user = models.CharField(max_length=100, blank=True, default='')
+
     def __str__(self):
-        return self.user + " " + self.answer
+        return self.text

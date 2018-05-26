@@ -2,6 +2,7 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 from app.models import Student, Course, Question, Answer
+from django.db import models
 
 #Default serializers
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -25,14 +26,30 @@ class CourseSerializer(serializers.HyperlinkedModelSerializer):
         model = Course
         fields = ('url', 'name')
 
-#Question serializer
+#Question serializer y creator
 class QuestionSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Question
-        fields = ('url', 'question', 'user')
+        fields = ('url',  'id','text', 'user','student')
+class QuestionSerializerCreator(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Question
+        fields = ('url',  'id','text', 'student')
 
-#Answer Serializer
+#Answer Serializer y creator
 class AnswerSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Answer
-        fields = ('url', 'question', 'answer', 'user')
+        fields = ('url', 'id', 'question', 'text', 'user','student')
+class AnswerSerializerCreator(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Answer
+        fields = ('url', 'id', 'question', 'text', 'student')
+
+#QuestionsAndAnswers Serializer
+class QASerializer(serializers.ModelSerializer):
+    question = serializers.PrimaryKeyRelatedField(queryset=Question.objects.all(),required=False, allow_null=True)
+    answer = serializers.PrimaryKeyRelatedField(queryset=Answer.objects.all(),required=False, allow_null=True)
+    class Meta:
+        model = models.Model
+        fields = "__all__"

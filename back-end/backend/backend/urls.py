@@ -34,6 +34,6 @@ urlpatterns = [
     url(r'^students/$',views.student_list),
     url(r'^courses/$',views.course_list),
     url(r'^questions/$',views.question_list),
-    url(r'^answers/$',views.answer_list),
+    url(r'^answers/(?P<pk>\d+)$',views.answer_list),
 
 ]

@@ -40,12 +40,12 @@ class CourseViewSet(viewsets.ModelViewSet):
 #Question ViewSet
 class QuestionViewSet(viewsets.ModelViewSet):
     queryset = Question.objects.all()
-    serializer_class = QuestionSerializer
+    serializer_class = QuestionSerializerCreator
 
 #Answer ViewSet
 class AnswerViewSet(viewsets.ModelViewSet):
     queryset = Answer.objects.all()
-    serializer_class = AnswerSerializer
+    serializer_class = AnswerSerializerCreator
 
 @csrf_exempt
 def student_list(request):
@@ -90,6 +90,8 @@ def question_list(request):
         }
     if request.method == 'GET':
         question = Question.objects.all()
+        for q in question:
+            q.user = q.student.name
         serializer = QuestionSerializer(question, many=True,context=serializer_context)
         return JsonResponse(serializer.data, safe=False)
 
@@ -102,12 +104,14 @@ def question_list(request):
         return JsonResponse(serializer.errors, status=400)
 
 @csrf_exempt
-def answer_list(request):
+def answer_list(request, pk):
     serializer_context = {
             'request': request,
         }
     if request.method == 'GET':
-        answer = Answer.objects.all()
+        answer = Answer.objects.filter(question_id=pk)
+        for a in answer:
+            a.user = a.student.name
         serializer = AnswerSerializer(answer, many=True,context=serializer_context)
         return JsonResponse(serializer.data, safe=False)
 
